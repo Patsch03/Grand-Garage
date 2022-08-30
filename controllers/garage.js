@@ -27,9 +27,9 @@ function createCart(req, res){
 
 function addCart(req, res){
     // Item.findById(req.params.id, function(err, items){
-    //     if(err) return res.redirect('/');
-    //     Cart.items.push(items);
-    //     res.render('garage/cart', { items });
+    //     if(err) return res.redirect('/garage');
+    //     items.purchased = false;
+    //     res.render('garage/index', { items });
     // })
 }
 

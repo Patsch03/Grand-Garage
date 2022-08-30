@@ -1,13 +1,10 @@
 <%- include('../partials/header')%>
 
-<% carts.forEach(function(i){ %>
     <div class = "item">
-        <p><%= i.items %></p>
+        <p>Plastic</p>
         <form action="/garage/cart" method="post">
             <input type="submit" value="Purchase All">
         </form>
     </div>
     
-    <% }); %>
-
 <%- include('../partials/footer')%>
