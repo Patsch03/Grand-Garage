@@ -3,12 +3,10 @@
 <% carts.forEach(function(i){ %>
     <div class = "item">
         <p><%= i.items %></p>
-        <form action="/cart" method="POST">
-            <input type="submit" value="Purchase Item">
+        <form action="/garage/cart" method="post">
+            <input type="submit" value="Purchase All">
         </form>
     </div>
-    
-    
     
     <% }); %>
 

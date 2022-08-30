@@ -9,12 +9,16 @@ function index(req,res){
     })
 }
 
+function show(req, res){
+    Item.findById(req.params.id, function(error, items){
+        items.save(function(error){
+          res.render('garage/show', {items});
+        });
+    });
+}
+
 function cartIndex(req, res){
-    // res.render('garage/cart');
-    Cart.find({}, function (err, carts){
-        if(err) return res.redirect('/');
-        res.render('garage/cart', { carts });
-    })
+    res.render("garage/cart");
 }
 
 function createCart(req, res){
@@ -22,7 +26,11 @@ function createCart(req, res){
 }
 
 function addCart(req, res){
-
+    // Item.findById(req.params.id, function(err, items){
+    //     if(err) return res.redirect('/');
+    //     Cart.items.push(items);
+    //     res.render('garage/cart', { items });
+    // })
 }
 
 function newGarage(req, res){
@@ -47,4 +55,5 @@ module.exports = {
     cartIndex,
     createCart,
     addCart,
+    show,
 };

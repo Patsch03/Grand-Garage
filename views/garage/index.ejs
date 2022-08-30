@@ -2,11 +2,15 @@
 
 <% items.forEach(function(i){ %>
 <div class = "item">
-    <p><%= i.name %></p>
-    <p><%= i.price %></p>
-    <p><%= i.description %></p>
-    <form action="/cart" method="POST">
-        <input type="submit" value="Purchase Item">
+    <% if(i.purchased == false){ %>
+        <p><%= i.name %></p>
+        <p><%= i.price %></p>
+        <p><%= i.description %></p>
+        <p><%= i.purchased %></p>
+    <% } %>
+
+    <form action="/garage/<%=i._id%>" method="get">
+        <input type="submit" value="Purchase">
     </form>
 </div>
 

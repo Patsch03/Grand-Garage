@@ -7,6 +7,7 @@ const itemSchema = new Schema
     name: String,
     price: Number,
     description: String,
+    purchased: {type: Boolean, default: false}
 
 },{
     timestamps: true
