@@ -6,13 +6,19 @@
             <p><%= i.name %></p>
             <p><%= i.price %></p>
             <p><%= i.description %></p>
+            
         <% } %>
 
 <% }); %>
-
-<form action="/garage/cart" method="post">
-    <input type="submit" value="Purchase All">
+<form action="/garage/cart" method="POST">
+    <input type="submit" value="Remove All">
 </form>
+
+<!-- <form action="/garage/cart" method="get">
+    <input type="submit" value="Purchase All">
+</form> -->
+
+
 </div>
     
 <%- include('../partials/footer')%>

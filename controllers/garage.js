@@ -51,7 +51,41 @@ function create(req, res) {
     });
   }
 
+//   function deleteO(req, res, next){
+//     Ditem.findOne({'ditem._id' : req.params.id}).then(function (movie){
+//       const review = movie.reviews.id(req.params.id);
+//       if(!review.user.equals(req.user._id)) return res.redirect(`/movies/${movie._id}`);
+//       review.remove();
+//       movie.save().then(function(){
+//         res.redirect(`/movies/${movie._id}`);
+//       }).catch(function(error){
+//         return next(err);
+//       })
+      
+//     });
+//   }
 
+function removeO(req, res){
+    // let id = "630dc97d4b8cbc8831f34280"
+    // Ditem.findById(id).exec(function(err, items){
+    //     console.log(items.purchased);
+    //     if(err) return res.redirect('/');
+    //     items.purchased = false;
+    //     items.save();
+    //     res.redirect("/garage/cart");
+    // });
+    Ditem.find({purchased : true}, function(err, ditems){
+        if (err) console.log("I hate it here");
+        ditems.forEach(function(f){
+            Ditem.findById(f._id).exec(function(err, items){
+                items.purchased = false;
+                items.save();
+            })
+        })
+        res.render('garage/cart', {ditems});
+    });
+
+}
 
 
 module.exports = {
@@ -61,4 +95,5 @@ module.exports = {
     cartIndex,
     addCart,
     show,
+    removeO,
 };

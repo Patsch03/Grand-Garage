@@ -7,11 +7,13 @@
         <p><%= i.price %></p>
         <p><%= i.description %></p>
         <p><%= i.purchased %></p>
+        <form action="/garage/<%=i._id%>" method="get">
+            <input type="submit" value="Purchase">
+        </form>
     <% } %>
 
-    <form action="/garage/<%=i._id%>" method="get">
-        <input type="submit" value="Purchase">
-    </form>
+    
+
 </div>
 
 
