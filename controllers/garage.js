@@ -1,36 +1,39 @@
 const Cart = require('../models/garage');
+const Ditem = require('../models/ditems');
 const Item = require('../models/garage');
+const { findById } = require('../models/garage');
 
 function index(req,res){
-    // res.render("garage/index");
-    Item.find({}, function (err, items){
+    Ditem.find({}, function (err, ditems){
         if(err) return res.redirect('/');
-        res.render('garage/index', { items });
+        res.render('garage/index', { ditems });
     })
 }
 
 function show(req, res){
-    Item.findById(req.params.id, function(error, items){
-        items.save(function(error){
-          res.render('garage/show', {items});
+    Ditem.findById(req.params.id, function(error, ditems){
+        ditems.save(function(error){
+          res.render('garage/show', {ditems});
         });
     });
 }
 
 function cartIndex(req, res){
-    res.render("garage/cart");
-}
-
-function createCart(req, res){
-    const cart = new Cart();
+    Ditem.find({purchased : true}, function(err,ditems){
+        if(err) return res.redirect('/')
+        res.render("garage/cart", {ditems});
+    })
 }
 
 function addCart(req, res){
-    // Item.findById(req.params.id, function(err, items){
-    //     if(err) return res.redirect('/garage');
-    //     items.purchased = false;
-    //     res.render('garage/index', { items });
-    // })
+    Ditem.findById(req.params.id).exec(function(err, items){
+        // console.log(items.purchased)
+        if(err) return res.redirect('/');
+        items.purchased = true;
+        // console.log(items.purchased)
+        items.save();
+        res.redirect("/garage/cart");
+    })
 }
 
 function newGarage(req, res){
@@ -39,13 +42,16 @@ function newGarage(req, res){
 
 
 function create(req, res) {
-    const item = new Item(req.body);
-    item.save(function(err) {
+    const ditem = new Ditem(req.body);
+    // const item = new Item(req.body);
+    ditem.save(function(err) {
       if (err) return res.render('garage/new');
-      console.log(item);
+      console.log(ditem);
       res.redirect('/garage');
     });
   }
+
+
 
 
 module.exports = {
@@ -53,7 +59,6 @@ module.exports = {
     new: newGarage,
     create,
     cartIndex,
-    createCart,
     addCart,
     show,
 };

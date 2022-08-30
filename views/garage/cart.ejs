@@ -1,10 +1,18 @@
 <%- include('../partials/header')%>
 
+<% ditems.forEach(function(i){ %>
     <div class = "item">
-        <p>Plastic</p>
-        <form action="/garage/cart" method="post">
-            <input type="submit" value="Purchase All">
-        </form>
-    </div>
+        <% if(i.purchased == true){ %>
+            <p><%= i.name %></p>
+            <p><%= i.price %></p>
+            <p><%= i.description %></p>
+        <% } %>
+
+<% }); %>
+
+<form action="/garage/cart" method="post">
+    <input type="submit" value="Purchase All">
+</form>
+</div>
     
 <%- include('../partials/footer')%>
