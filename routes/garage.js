@@ -7,14 +7,18 @@ const garageCtrl = require('../controllers/garage');
 /* GET users listing. */
 
 router.get('/', garageCtrl.index);
+router.post('/', garageCtrl.create);
+
 router.get('/new', garageCtrl.new);
+
 router.get('/cart', garageCtrl.cartIndex);
 router.post('/cart', garageCtrl.removeO);
+
 router.post('/:id', garageCtrl.addCart);
-router.post('/', garageCtrl.create);
 router.get('/:id', garageCtrl.show);
+
 router.get('/:id/remove', garageCtrl.remove);
-router.delete('/:id/remove', garageCtrl.removeIE);
+router.delete('/:id/remove', garageCtrl.delete);
 
 // router.delete('/cart', garageCtrl.deleteO);
 
