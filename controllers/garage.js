@@ -20,9 +20,9 @@ function show(req, res){
 }
 
 function cartIndex(req, res){
-    Ditem.find({purchased : true}, function(err,ditems){
+    Cart.find({/*something in here eventually to find specific cart*/}, function(err,arr){
         if(err) return res.redirect('/')
-        res.render("garage/cart", {ditems});
+        res.render("garage/cart", {arr});
     })
 }
 
@@ -31,6 +31,10 @@ function addCart(req, res){
         if(err) return res.redirect('/');
         items.purchased = true;
         items.save();
+        Cart.findById("630e57031e52f87a34475e64").exec(function(err, cart){
+            cart.items.push(items);
+            cart.save();
+        })
         res.redirect("/garage/cart");
     })
 }
@@ -57,6 +61,10 @@ function removeO(req, res){
             Ditem.findById(f._id).exec(function(err, items){
                 items.purchased = false;
                 items.save();
+                Cart.findById("630e57031e52f87a34475e64").exec(function(err, cart){
+                    cart.items.pop();
+                    cart.save();
+                })
             })
         })
         res.render('garage/cart', {ditems});
@@ -73,30 +81,16 @@ function remove(req, res){
 }
 
 function removeIE(req, res, next){
-    // WORKS IF POST METHOD
-    // Ditem.findOne({_id : req.params.id}).then(function (movie){
-    //     movie.remove();
-    //     movie.save().then(function(){
-    //         res.redirect(`/garage`);
-    //       }).catch(function(err){
-    //         return next(err);
-    //       })
-    //   });
-
-    // Ditem.deleteOne({_id  : req.body.id}, function(err){
-    //     if(err){
-    //         return err;
-    //     }
-    // })
-    //
-
     Ditem.findByIdAndDelete(req.params.id, function(err, flight){
         res.redirect('/garage');
     });
-
-
 }
 
+function purchase(req, res){
+    Ditem.deleteMany({purchased : true}, function (err, items){
+        res.redirect("/garage/cart");
+    })
+}
 
 module.exports = {
     index,
@@ -108,4 +102,5 @@ module.exports = {
     removeO,
     remove,
     delete: removeIE,
+    purchase,
 };

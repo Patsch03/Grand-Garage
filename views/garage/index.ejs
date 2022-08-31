@@ -10,6 +10,11 @@
         <form action="/garage/<%=i._id%>" method="get">
             <input type="submit" value="Purchase">
         </form>
+        <form action="/garage/<%=i._id %>/remove?_method=DELETE" method="POST">
+            <button type="submit">Remove from Website</button> 
+            <!-- Needs OAuth -->
+        </form>
+        
 <% } %>
 
     

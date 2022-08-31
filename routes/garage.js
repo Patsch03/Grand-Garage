@@ -13,6 +13,7 @@ router.get('/new', garageCtrl.new);
 
 router.get('/cart', garageCtrl.cartIndex);
 router.post('/cart', garageCtrl.removeO);
+router.delete('/cart', garageCtrl.purchase);
 
 router.post('/:id', garageCtrl.addCart);
 router.get('/:id', garageCtrl.show);

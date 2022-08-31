@@ -1,18 +1,17 @@
 <%- include('../partials/header')%>
 
-<% ditems.forEach(function(i){ %>
-    <div class = "item">
-        <% if(i.purchased == true){ %>
-            <p><%= i.name %></p>
-            <p><%= i.price %></p>
-            <p><%= i.description %></p>
-            
-        <% } %>
+<%= arr %>
 
-<% }); %>
+
 <form action="/garage/cart" method="POST">
     <input type="submit" value="Remove All">
 </form>
+
+<form action="/garage/cart?_method=DELETE" method="POST">
+    <button type="submit">Purchase All!</button> 
+    <!-- Needs OAuth -->
+</form>
+
 
 
 
