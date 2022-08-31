@@ -1,12 +1,22 @@
 <%- include('../partials/header')%>
 
     <div class = "item">
-        <p><%= ditems.name %></p>
-        <p><%= ditems.price %></p>
-        <p><%= ditems.description %></p>
-        <p><%= ditems.purchased %></p>
+
+        <% if(ditems != null){ %>
+            <p><%= ditems.name %></p>
+            <p><%= ditems.price %></p>
+            <p><%= ditems.description %></p>
+            <p><%= ditems.purchased %></p>
+        <% }else if(ditems == null){ %>
+            <p>Sup foo</p>
+       <% } %>
+
+
         <form action="/garage/<%=ditems._id%>" method = "post">
             <input type="submit" value="Add To Cart">
+        </form>
+        <form action="/garage/<%= ditems._id %>/remove" method="get">
+            <button type="submit">Remove from Website</button>
         </form>
     </div>
     

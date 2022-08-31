@@ -3,6 +3,7 @@ const Ditem = require('../models/ditems');
 const Item = require('../models/garage');
 const { findById } = require('../models/garage');
 
+
 function index(req,res){
     Ditem.find({}, function (err, ditems){
         if(err) return res.redirect('/');
@@ -75,7 +76,7 @@ function removeO(req, res){
     //     res.redirect("/garage/cart");
     // });
     Ditem.find({purchased : true}, function(err, ditems){
-        if (err) console.log("I hate it here");
+        if (err) console.log(err);
         ditems.forEach(function(f){
             Ditem.findById(f._id).exec(function(err, items){
                 items.purchased = false;
@@ -84,6 +85,38 @@ function removeO(req, res){
         })
         res.render('garage/cart', {ditems});
     });
+
+}
+
+function remove(req, res){
+    Ditem.findById(req.params.id, function(error, ditems){
+        ditems.save(function(error){
+          res.render('garage/remove', {ditems});
+        });
+    });
+}
+
+function removeIE(req, res, next){
+    // WORKS IF POST METHOD
+    // Ditem.findOne({_id : req.params.id}).then(function (movie){
+    //     movie.remove();
+    //     movie.save().then(function(){
+    //         res.redirect(`/garage`);
+    //       }).catch(function(err){
+    //         return next(err);
+    //       })
+    //     res.redirect("/garage");
+    //   });
+
+    Ditem.findOne({_id : req.params.id}).then(function (ditems){
+        ditems.remove();
+        ditems.save().then(function(){
+          res.redirect(`/garage`);
+        }).catch(function(err){
+          return next(err);
+        })
+        
+      });
 
 }
 
@@ -96,4 +129,6 @@ module.exports = {
     addCart,
     show,
     removeO,
+    remove,
+    removeIE,
 };
