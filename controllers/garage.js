@@ -88,6 +88,7 @@ function removeIE(req, res, next){
     //         return err;
     //     }
     // })
+    //
 
     Ditem.findByIdAndDelete(req.params.id, function(err, flight){
         res.redirect('/garage');

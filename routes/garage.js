@@ -20,7 +20,7 @@ router.get('/:id', garageCtrl.show);
 router.get('/:id/remove', garageCtrl.remove);
 router.delete('/:id/remove', garageCtrl.delete);
 
-// router.delete('/cart', garageCtrl.deleteO);
+
 
 
 
