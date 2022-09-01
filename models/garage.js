@@ -16,17 +16,11 @@ const itemSchema = new Schema
 
 const cartSchema = new Schema
 ({
-    items: [itemSchema], // cant push to undefined array 
+    items: [itemSchema],
 
 },{
     timestamps: true
 })
-
-
-
-
-// module.exports = mongoose.model
-// ("Item", itemSchema);
 
 module.exports = mongoose.model
 ("Cart", cartSchema);

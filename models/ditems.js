@@ -18,13 +18,5 @@ const ditemSchema = new Schema
 })
 
 
-
-
-
-
 module.exports = mongoose.model
 ("Ditem", ditemSchema);
-
-// module.exports = mongoose.model
-// ("Cart", cartSchema);
-//
