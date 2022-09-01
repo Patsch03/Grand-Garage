@@ -20,10 +20,12 @@ function show(req, res){
 }
 
 function cartIndex(req, res){
-    Cart.find({/*something in here eventually to find specific cart*/}, function(err,arr){
-        if(err) return res.redirect('/')
-        res.render("garage/cart", {arr});
+    Cart.find({/*something in here eventually to find specific cart*/}).exec(function(err, items){
+        // console.log(items);
+        console.log(items[0].items[0].name);
+        res.render("garage/cart", {items});
     })
+
 }
 
 function addCart(req, res){
