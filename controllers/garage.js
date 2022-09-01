@@ -21,8 +21,6 @@ function show(req, res){
 
 function cartIndex(req, res){
     Cart.find({/*something in here eventually to find specific cart*/}).exec(function(err, items){
-        // console.log(items);
-        // console.log(items[0].items[0].name);
         res.render("garage/cart", {items});
     })
 
@@ -48,7 +46,17 @@ function newGarage(req, res){
 
 
 function create(req, res) {
-    const ditem = new Ditem(req.body);
+    const ditem = new Ditem(
+        {
+            name : req.body.name,
+            price : req.body.price,
+            description : req.body.description,
+            user : req.user._id,
+            userName : req.user.name,
+            userAvatar : req.user.avatar,
+
+
+        });
     ditem.save(function(err) {
       if (err) return res.render('garage/new');
       res.redirect('/garage');
