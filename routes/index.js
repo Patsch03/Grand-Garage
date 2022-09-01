@@ -12,6 +12,15 @@ router.get('/auth/google', passport.authenticate(
   { scope: ['profile', 'email'] }
 ));
 
+
+router.get('/oauth2callback', passport.authenticate(
+  'google',
+  {
+    successRedirect : '/garage',
+    failureRedirect : '/'
+  }
+));
+
 // Google OAuth callback route
 router.get('/auth/google/oauth2callback', passport.authenticate(
   'google',
