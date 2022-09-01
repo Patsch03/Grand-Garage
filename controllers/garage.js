@@ -22,7 +22,7 @@ function show(req, res){
 function cartIndex(req, res){
     Cart.find({/*something in here eventually to find specific cart*/}).exec(function(err, items){
         // console.log(items);
-        console.log(items[0].items[0].name);
+        // console.log(items[0].items[0].name);
         res.render("garage/cart", {items});
     })
 
@@ -33,8 +33,9 @@ function addCart(req, res){
         if(err) return res.redirect('/');
         items.purchased = true;
         items.save();
-        Cart.findById("630e57031e52f87a34475e64").exec(function(err, cart){
+        Cart.findById("63103effb12e746007a39c91").exec(function(err, cart){
             cart.items.push(items);
+            items.remove();
             cart.save();
         })
         res.redirect("/garage/cart");
@@ -48,30 +49,41 @@ function newGarage(req, res){
 
 function create(req, res) {
     const ditem = new Ditem(req.body);
-    // const item = new Item(req.body);
     ditem.save(function(err) {
       if (err) return res.render('garage/new');
-      console.log(ditem);
       res.redirect('/garage');
     });
   }
 
 function removeO(req, res){
-    Ditem.find({purchased : true}, function(err, ditems){
-        if (err) console.log(err);
-        ditems.forEach(function(f){
-            Ditem.findById(f._id).exec(function(err, items){
-                items.purchased = false;
-                items.save();
-                Cart.findById("630e57031e52f87a34475e64").exec(function(err, cart){
-                    cart.items.pop();
-                    cart.save();
-                })
-            })
-        })
-        res.render('garage/cart', {ditems});
-    });
+    Cart.find({}, function(err, items){
+        if(err) return console.log(err);
+        // items.purchased = false;
+        // items.save();
+        items.forEach(function(i){
+            // console.log(i);
+            for(let j = 0; j < i.items.length; j++){
+                // console.log(i.items);
+                let ditem = new Ditem(
+                    {
+                        name: i.items[j].name,
+                        price : i.items[j].price,
+                        description : i.items[j].description,
+                        purchased : false,    
+                    });
+                    ditem.save();
+            }
+            Cart.find({}, function(err, items){
+                while(items[0].items[0]){
+                    items[0].items[0].remove();
+                }
+                items[0].save();
 
+            });
+        })
+        // console.log(items);
+        res.redirect("/garage/cart");
+    })
 }
 
 function remove(req, res){
