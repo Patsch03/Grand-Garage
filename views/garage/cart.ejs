@@ -1,11 +1,12 @@
 <%- include('../partials/header')%>
 
-<% items.forEach(function(i){ %>
-    <% for(let j = 0; j < i.items.length; j++){ %>
-        <p><%= i.items[j].name %></p>
-        <p><%= i.items[j].price %></p>
-        <p><%= i.items[j].description %></p>
-    <% } %>
+<% cart.items.forEach(function(i){ %>
+        <p><%= i.name %></p>
+        <p><%= i.price %></p>
+        <p><%= i.description %></p>
+        <p><%= i.userName %></p>
+        <img src="<%= i.userAvatar %>">
+
 <% }) %>
 
 

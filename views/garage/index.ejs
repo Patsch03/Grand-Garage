@@ -10,15 +10,20 @@
         <!-- <p><%= i.user%></p> -->
         <p><%= i.userName%></p>
         <img src="<%= i.userAvatar %>">
+        <% if (!(user && user._id.equals(i.user))) { %>
             <form action="/garage/<%=i._id%>" method="get">
                 <input type="submit" value="Purchase">
             </form>
-        <% if (user && user._id.equals(i.user)) { %>
-            <form action="/garage/<%=i._id %>/remove?_method=DELETE" method="POST">
-                <button type="submit">Remove from Website</button> 
-                <!-- Needs OAuth -->
-            </form>
         <% } %>
+
+
+
+            <% if (user && user._id.equals(i.user)) { %>
+                <form action="/garage/<%=i._id %>/remove?_method=DELETE" method="POST">
+                    <button type="submit">Remove from Website</button> 
+                    <!-- Needs OAuth -->
+                </form>
+            <% } %>
 
         
 <% } %>

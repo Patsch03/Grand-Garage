@@ -1,6 +1,8 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('../models/user');
+const Cart = require('../models/garage');
 
 passport.use(
     new GoogleStrategy(
@@ -20,8 +22,13 @@ passport.use(
                 name: profile.displayName,
                 googleId: profile.id,
                 email: profile.emails[0].value,
-                avatar: profile.photos[0].value
+                avatar: profile.photos[0].value,
               });
+
+              const cart = new Cart({
+                _id : mongoose.Types.ObjectId(user.googleId + "654"),
+              });
+              cart.save();
               return cb(null, user);
             } catch (err) {
               return cb(err);

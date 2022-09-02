@@ -1,6 +1,7 @@
 const Cart = require('../models/garage');
 const Ditem = require('../models/ditems');
 const Item = require('../models/garage');
+const User = require('../models/user');
 const { findById } = require('../models/garage');
 
 
@@ -20,9 +21,16 @@ function show(req, res){
 }
 
 function cartIndex(req, res){
-    Cart.find({/*something in here eventually to find specific cart*/}).exec(function(err, items){
-        res.render("garage/cart", {items});
-    })
+
+    if(req.isAuthenticated()){
+        console.log(req.user.googleId + "654");
+        Cart.findById(req.user.googleId + "654").exec(function(err, cart){
+            console.log(cart);
+            res.render("garage/cart", {cart});
+        })
+    }else{
+        res.redirect('/garage');
+    }
 
 }
 
@@ -30,8 +38,10 @@ function addCart(req, res){
     Ditem.findById(req.params.id).exec(function(err, items){
         if(err) return res.redirect('/');
         items.purchased = true;
+        console.log(items);
         items.save();
-        Cart.findById("63103effb12e746007a39c91").exec(function(err, cart){
+
+        Cart.findById(req.user.googleId + "654").exec(function(err, cart){
             cart.items.push(items);
             items.remove();
             cart.save();
@@ -54,8 +64,6 @@ function create(req, res) {
             user : req.user._id,
             userName : req.user.name,
             userAvatar : req.user.avatar,
-
-
         });
     ditem.save(function(err) {
       if (err) return res.render('garage/new');
@@ -64,32 +72,26 @@ function create(req, res) {
   }
 
 function removeO(req, res){
-    Cart.find({}, function(err, items){
+    Cart.findById(req.user.googleId + "654", function(err, cart){ // changeitems
         if(err) return console.log(err);
-        // items.purchased = false;
-        // items.save();
-        items.forEach(function(i){
-            // console.log(i);
-            for(let j = 0; j < i.items.length; j++){
-                // console.log(i.items);
-                let ditem = new Ditem(
-                    {
-                        name: i.items[j].name,
-                        price : i.items[j].price,
-                        description : i.items[j].description,
-                        purchased : false,    
-                    });
-                    ditem.save();
-            }
-            Cart.find({}, function(err, items){
-                while(items[0].items[0]){
-                    items[0].items[0].remove();
-                }
-                items[0].save();
-
+        for(let i = 0; i < cart.items.length; i++){
+            let ditem = new Ditem({
+                name: cart.items[i].name,
+                price : cart.items[i].price,
+                description : cart.items[i].description,
+                purchased : false,    
+                user : cart.items[i].user,
+                userName : cart.items[i].userName,
+                userAvatar : cart.items[i].userAvatar,
             });
-        })
-        // console.log(items);
+            ditem.save();
+        }
+            Cart.findById(req.user.googleId + "654", function(err, items){
+                while(items.items[0]){
+                    items.items[0].remove();
+               }
+               items.save();
+            });
         res.redirect("/garage/cart");
     })
 }
