@@ -13,7 +13,7 @@
     <div class = "header">
         <a class = "head1" href = "/garage/new">New Item</a>
         <a class = "head2" href ="/garage">All Items</a>
-        <a class = "head3" href ="/garage/cart">Cart</a>
+        <a class = "head3" href ="/garage/cart" style="font-size: 100px">Cart</a>
     </div>
 
     <nav class = "nav">
@@ -26,10 +26,10 @@
 <% cart.items.forEach(function(i){ %>
     <div class = "grid-container">
         <div class = "grid-item">
-            <p><%= i.name %></p>
-            <p><%= i.price %></p>
-            <p><%= i.description %></p>
-            <p><%= i.userName %></p>
+            <p>Item : <%= i.name %></p>
+            <p>Price: $<%= i.price %></p>
+            <p>Description: <%= i.description %></p>
+            <p>User listed: <%= i.userName %></p>
             <img src="<%= i.userAvatar %>">
     
         </div>

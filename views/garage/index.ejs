@@ -11,7 +11,7 @@
 <body>
     <div class = "header">
         <a class = "head1" href = "/garage/new">New Item</a>
-        <a class = "head2" href ="/garage">All Items</a>
+        <a class = "head2" href ="/garage" style="font-size: 100px">All Items</a>
         <a class = "head3" href ="/garage/cart">Cart</a>
     </div>
     
@@ -28,8 +28,8 @@
     <% if(i.purchased == false){ %>
         <% if (i.show == null) { %>
             <div class="grid-item">
-                <p>Name: <%= i.name %></p>
-                <p>This item is: <%= i.description %></p>
+                <p>Item: <%= i.name %></p>
+                <p>Description: <%= i.description %></p>
                 <p>$<%= i.price %></p>
                 <p><%= i.userName%></p>
             <img src="<%= i.userAvatar %>">
