@@ -26,6 +26,7 @@
 <% ditems.forEach(function(i){ %>
     <div class="grid-container">
     <% if(i.purchased == false){ %>
+        <% if (i.show == null) { %>
             <div class="grid-item">
                 <p>Name: <%= i.name %></p>
                 <p>This item is: <%= i.description %></p>
@@ -37,13 +38,15 @@
                         <input type="submit" value="Purchase">
                     </form>
                 <% } %>
-                
+
                 <% if (user && user._id.equals(i.user)) { %>
                     <form action="/garage/<%=i._id %>/remove?_method=DELETE" method="POST">
                         <button type="submit">Remove from Website</button> 
                     </form>
                 <% } %>
             </div>
+            <% } %> 
+
     </div> 
 <% } %>
 </div>

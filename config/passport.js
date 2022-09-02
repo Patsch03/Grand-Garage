@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('../models/user');
 const Cart = require('../models/garage');
+const Ditem = require('../models/ditems')
 
 passport.use(
     new GoogleStrategy(
@@ -28,6 +29,11 @@ passport.use(
               const cart = new Cart({
                 _id : mongoose.Types.ObjectId(user.googleId + "654"),
               });
+
+              const ditem = new Ditem({
+                show: false,
+              })
+              ditem.save();
               cart.save();
               return cb(null, user);
             } catch (err) {
