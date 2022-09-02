@@ -37,7 +37,6 @@ function addCart(req, res){
     Ditem.findById(req.params.id).exec(function(err, items){
         if(err) return res.redirect('/');
         items.purchased = true;
-        console.log(items);
         items.save();
 
         Cart.findById(req.user.googleId + "654").exec(function(err, cart){
