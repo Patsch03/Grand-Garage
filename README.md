@@ -51,6 +51,9 @@ There are multiple things that I plan on implementing and these include
 
 ## Credits 
 Patrick Schenk
+
+and
+
 Instructional Team at GA, 
 * Suresh Sigera 
 * Nellie Bosch 
