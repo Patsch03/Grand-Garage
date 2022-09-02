@@ -5,11 +5,11 @@ This is my second project for General Assembly's Software Engineering Immersive 
 It is a website where you can buy and sell items, the items are posted by other users. 
 This project has 5 main pages, the home page, the page that lists all the items, a page to add items, a page with the description of an item, a cart page
 
-![Home page](image.jpg)
-![Listing page](image.jpg)
-![Add new item](image.jpg)
-![Item description page](image.jpg)
-![Cart Page](image.jpg)
+![Home page](https://i.imgur.com/fOQmheh.jpeg)
+![Listing page](https://i.imgur.com/dYvmrO5.png)
+![Add new item](https://i.imgur.com/znLSUYf.png)
+![Item description page](https://i.imgur.com/ziBeAd6.png)
+![Cart Page](https://i.imgur.com/xpKz9rm.png)
 
 
 ## Technologies used 
