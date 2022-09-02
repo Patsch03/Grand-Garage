@@ -36,16 +36,15 @@ function cartIndex(req, res){
 function addCart(req, res){
     Ditem.findById(req.params.id).exec(function(err, items){
         if(err) return res.redirect('/');
-        items.purchased = true;
-        items.save();
-
         Cart.findById(req.user.googleId + "654").exec(function(err, cart){
             cart.items.push(items);
             items.remove();
             cart.save();
+
+
+            res.render("garage/cart", {cart});
         })
-        res.redirect("/garage/cart");
-        
+
     })
 }
 
