@@ -28,6 +28,7 @@
             <p><%= ditems.price %></p>
             <p><%= ditems.description %></p>
             <p><%= ditems.userName %></p>
+            <p>Is this item availible: <%= !ditems.Purchased %></p>
             <img src="<%= ditems.userAvatar %>">
         <% }else if(ditems == null){ %>
             <p>Sup foo</p>

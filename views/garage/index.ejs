@@ -32,6 +32,7 @@
                 <p>Description: <%= i.description %></p>
                 <p>$<%= i.price %></p>
                 <p><%= i.userName%></p>
+                <p>Is this item availible: <%= !i.Purchased %></p>
             <img src="<%= i.userAvatar %>">
                 <% if (user && !(user._id.equals(i.user))) { %>
                     <form action="/garage/<%=i._id%>" method="get">
