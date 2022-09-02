@@ -1,0 +1,28 @@
+.head1{
+    padding-left: 200px;
+    padding-right: 100px;
+    color: white;
+    font-size: 50px
+    
+  
+  }
+  
+  .head2{
+    padding-left: 100px;
+    padding-right: 100px;
+    color: white;
+    font-size: 50px
+  
+  }
+  
+  .head3{
+    padding-left: 100px;
+    padding-right: 100px;
+    color: white;
+    font-size: 50px
+  
+  }
+
+body{
+    background-color: darkgray;
+}
