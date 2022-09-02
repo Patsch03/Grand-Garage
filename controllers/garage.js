@@ -72,7 +72,7 @@ function create(req, res) {
   }
 
 function removeO(req, res){
-    Cart.findById(req.user.googleId + "654", function(err, cart){ // changeitems
+    Cart.findById(req.user.googleId + "654", function(err, cart){ 
         if(err) return console.log(err);
         for(let i = 0; i < cart.items.length; i++){
             let ditem = new Ditem({
@@ -111,9 +111,13 @@ function removeIE(req, res, next){
 }
 
 function purchase(req, res){
-    Ditem.deleteMany({purchased : true}, function (err, items){
-        res.redirect("/garage/cart");
-    })
+    Cart.findById(req.user.googleId + "654", function(err, items){
+        while(items.items[0]){
+            items.items[0].remove();
+       }
+       items.save();
+    });
+    res.redirect("/garage");
 }
 
 module.exports = {
