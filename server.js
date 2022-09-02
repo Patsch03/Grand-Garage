@@ -9,12 +9,14 @@ require('dotenv').config();
 require('./config/database');
 require('./config/passport');
 
+
 var indexRouter = require('./routes/index');
 var garageRouter = require('./routes/garage');
 
 var methodOverride = require("method-override");
 
 var app = express();
+app.use(express.static('public'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

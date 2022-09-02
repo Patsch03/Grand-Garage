@@ -1,0 +1,21 @@
+body{
+    background-image: url('https://bensbargains.com/thecheckout/wp-content/uploads/2016/07/cool-garage.jpeg');
+}
+
+h1{
+    position: absolute;
+    top: 490px;
+    left: 870px;
+    color: white;
+}
+a{
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    color: gray;
+
+    
+
+}

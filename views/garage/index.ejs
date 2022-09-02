@@ -1,40 +1,50 @@
-<%- include('../partials/header')%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mongoose garage</title>
+    <link rel = "stylesheet" href="stylesheets/style.css">
+</head>
 
-<% ditems.forEach(function(i){ %>
-<div class = "item">
-    <% if(i.purchased == false){ %>
-        <p><%= i.name %></p>
-        <p><%= i.price %></p>
-        <p><%= i.description %></p>
-        <p><%= i.purchased %></p>
-        <!-- <p><%= i.user%></p> -->
-        <p><%= i.userName%></p>
-        <img src="<%= i.userAvatar %>">
-        <% if (!(user && user._id.equals(i.user))) { %>
-            <form action="/garage/<%=i._id%>" method="get">
-                <input type="submit" value="Purchase">
-            </form>
-        <% } %>
-
-
-
-            <% if (user && user._id.equals(i.user)) { %>
-                <form action="/garage/<%=i._id %>/remove?_method=DELETE" method="POST">
-                    <button type="submit">Remove from Website</button> 
-                    <!-- Needs OAuth -->
-                </form>
-            <% } %>
-
-        
-<% } %>
-
+<body>
+    <div class = "header">
+        <a class = "head1" href = "/garage/new">New Item</a>
+        <a class = "head2" href ="/garage">All Items</a>
+        <a class = "head3" href ="/garage/cart">Cart</a>
+    </div>
     
 
+    <nav>
+        <% if (user) { %>
+          <a href="/logout">LOG OUT</a>
+        <% } else { %>
+          <a class ="googleB" href="/auth/google" class="login"><img src="https://i.imgur.com/FHjYyi0.png" style="width: 60px;"></a>
+        <% } %>
+      </nav>
+<% ditems.forEach(function(i){ %>
+    <div class="grid-container">
+    <% if(i.purchased == false){ %>
+            <div class="grid-item">
+                <p>Name: <%= i.name %></p>
+                <p>This item is: <%= i.description %></p>
+                <p>$<%= i.price %></p>
+                <p><%= i.userName%></p>
+            <img src="<%= i.userAvatar %>">
+                <% if (!(user && user._id.equals(i.user))) { %>
+                    <form action="/garage/<%=i._id%>" method="get">
+                        <input type="submit" value="Purchase">
+                    </form>
+                <% } %>
+                <% if (user && user._id.equals(i.user)) { %>
+                    <form action="/garage/<%=i._id %>/remove?_method=DELETE" method="POST">
+                        <button type="submit">Remove from Website</button> 
+                    </form>
+                <% } %>
+            </div>
+    </div> 
+<% } %>
 </div>
-
-
-
 <% }); %>
-
-
 <%- include('../partials/footer')%>

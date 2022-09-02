@@ -1,5 +1,27 @@
-<%- include('../partials/header')%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mongoose garage</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/cart.css" />
+</head>
 
+<body>
+
+    <a href = "/garage/new">New Item </a><------ Sign in before using<br> 
+    <a href ="/garage">All Items </a><br>
+    <a href ="/garage/cart">Cart</a> <------ Sign in before using
+
+    <nav class = "nav">
+        <img src="/images/camera.svg">
+        <% if (user) { %>
+          <a href="/logout">LOG OUT</a>
+        <% } else { %>
+          <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        <% } %>
+    </nav>
 <% cart.items.forEach(function(i){ %>
         <p><%= i.name %></p>
         <p><%= i.price %></p>
@@ -8,6 +30,8 @@
         <img src="<%= i.userAvatar %>">
 
 <% }) %>
+
+
 
 
 

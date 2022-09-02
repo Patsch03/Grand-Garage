@@ -4,7 +4,6 @@ const Item = require('../models/garage');
 const User = require('../models/user');
 const { findById } = require('../models/garage');
 
-
 function index(req,res){
     Ditem.find({}, function (err, ditems){
         if(err) return res.redirect('/');
@@ -47,11 +46,17 @@ function addCart(req, res){
             cart.save();
         })
         res.redirect("/garage/cart");
+        
     })
 }
 
 function newGarage(req, res){
-    res.render("garage/new");
+    if(req.isAuthenticated()){
+        res.render("garage/new");
+    }else{
+        res.redirect("/garage");
+    }
+    
 }
 
 
