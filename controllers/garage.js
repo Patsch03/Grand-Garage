@@ -20,9 +20,7 @@ function show(req, res){
 }
 
 function cartIndex(req, res){
-
     if(req.isAuthenticated()){
-        console.log(req.user.googleId + "654");
         Cart.findById(req.user.googleId + "654").exec(function(err, cart){
             console.log(cart);
             res.render("garage/cart", {cart});
@@ -72,6 +70,8 @@ function create(req, res) {
             user : req.user._id,
             userName : req.user.name,
             userAvatar : req.user.avatar,
+            image : req.body.image
+    
         });
     ditem.save(function(err) {
       if (err) return res.render('garage/new');
@@ -91,6 +91,7 @@ function removeO(req, res){
                 user : cart.items[i].user,
                 userName : cart.items[i].userName,
                 userAvatar : cart.items[i].userAvatar,
+                image : cart.items[i].image,
             });
             ditem.save();
         }
@@ -128,6 +129,28 @@ function purchase(req, res){
     res.redirect("/garage");
 }
 
+function edit(req, res){
+    console.log(req.params.id)
+    Ditem.findById(req.params.id, function(err, ditems){
+        ditems.name = req.body.name
+        ditems.price = req.body.price
+        ditems.description = req.body.description
+        ditems.image = req.body.image
+        ditems.save();
+    })
+
+    res.redirect('/garage');
+    
+}
+
+function editGet(req, res){
+    Ditem.findById(req.params.id, function(error, ditems){
+        ditems.save(function(error){
+          res.render('garage/edit', {ditems});
+        });
+    });
+}
+
 module.exports = {
     index,
     new: newGarage,
@@ -139,4 +162,7 @@ module.exports = {
     remove,
     delete: removeIE,
     purchase,
+    edit,
+    editGet,
 };
+// test github

@@ -11,6 +11,7 @@ const itemSchema = new Schema
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     userName: String,
     userAvatar: String,
+    image: String,
     
 
 },{

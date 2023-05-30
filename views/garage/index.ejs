@@ -28,12 +28,15 @@
     <% if(i.purchased == false){ %>
         <% if (i.show == null) { %>
             <div class="grid-item">
+                
                 <p>Item: <%= i.name %></p>
                 <p>Description: <%= i.description %></p>
                 <p>$<%= i.price %></p>
-                <p><%= i.userName%></p>
+                <p>Seller: <%= i.userName%></p>
                 <p>Is this item availible: <%= !i.Purchased %></p>
-            <img src="<%= i.userAvatar %>">
+                <img style = "height:100px; width: 155px;"src="<%= i.image %>"><br>
+                
+                <!-- <img src="<%= i.userAvatar %>"> -->
                 <% if (user && !(user._id.equals(i.user))) { %>
                     <form action="/garage/<%=i._id%>" method="get">
                         <input type="submit" value="See more Details">
@@ -45,6 +48,10 @@
                         <button type="submit">Remove from Website</button> 
                     </form>
                 <% } %>
+
+                <form action="/garage/edit/<%=i._id %>" method="get">
+                    <button type="submit">Edit Item</button> 
+                </form>
             </div>
             <% } %> 
 

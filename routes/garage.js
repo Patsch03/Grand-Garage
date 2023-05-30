@@ -9,6 +9,9 @@ const garageCtrl = require('../controllers/garage');
 router.get('/', garageCtrl.index);
 router.post('/', garageCtrl.create);
 
+router.post('/edit/:id', garageCtrl.edit);
+router.get('/edit/:id', garageCtrl.editGet);
+
 router.get('/new', garageCtrl.new);
 
 router.get('/cart', garageCtrl.cartIndex);

@@ -12,6 +12,7 @@ const ditemSchema = new Schema
     userName: String,
     userAvatar: String,
     show: Boolean,
+    image: String,
 
 
 },{
