@@ -29,9 +29,8 @@ This project has 5 main pages, the home page, the page that lists all the items,
 Log into the website with google by clicking the Google icon, and then you are free to do whatever you want in the website, create items, remove your own items, buy other peoples items, almost anything! (Note that the cart and new items link will not work unless signed in)
 
 ## Original Wireframe and Planning 
-* [Lucid](https://lucid.app/lucidchart/b87764aa-07e5-4e65-9341-7701001a847a/edit?invitationId=inv_7ba32e97-945c-4498-a69b-35dbcc0eaa2d&page=0_0#)
+* [Lucid](https://lucid.app/lucidchart/b87764aa-07e5-4e65-9341-7701001a847a/edit?page=0_0&invitationId=inv_7ba32e97-945c-4498-a69b-35dbcc0eaa2d#)
 * [Whimsical](https://whimsical.com/crud-grand-garage-4KdaPAfvXYjCUS8wwc8yUG)
-
 
 ## Wins 
 One major win from this project was being able to implement full CRUD (Create Read Update Delete), I was able to accomplish at least one of each CRUD function.
